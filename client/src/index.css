@@ -1,0 +1,29 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-bg text-text-primary antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen font-sans;
+    overflow-x: hidden;
+  }
+
+  a {
+    @apply text-brand transition-colors duration-200;
+  }
+
+  a:hover {
+    @apply text-brand-soft;
+  }
+}
+
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}

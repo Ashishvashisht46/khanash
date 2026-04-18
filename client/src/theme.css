@@ -1,0 +1,206 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root,
+:root[data-theme='clinical'] {
+  color-scheme: dark;
+  --bg-rgb: 9 17 31;
+  --surface-rgb: 15 27 49;
+  --panel-rgb: 19 35 63;
+  --panel-alt-rgb: 23 43 77;
+  --panel-soft-rgb: 29 51 91;
+  --line-rgb: 41 69 111;
+  --line-strong-rgb: 59 93 144;
+  --text-primary-rgb: 243 247 254;
+  --text-muted-rgb: 151 171 201;
+  --text-soft-rgb: 111 133 168;
+  --brand-rgb: 85 195 255;
+  --brand-strong-rgb: 30 167 255;
+  --brand-soft-rgb: 138 215 255;
+  --brand-deep-rgb: 15 110 184;
+  --accent-rgb: 126 240 199;
+  --accent-strong-rgb: 52 211 167;
+  --accent-soft-rgb: 191 248 229;
+  --gold-rgb: 214 175 55;
+  --gold-light-rgb: 240 208 96;
+  --gold-dark-rgb: 184 150 12;
+  --navy-rgb: 11 22 36;
+  --navy-light-rgb: 17 30 48;
+  --navy-mid-rgb: 17 34 54;
+  --success-rgb: 54 211 153;
+  --warning-rgb: 246 197 95;
+  --danger-rgb: 255 123 139;
+  --info-rgb: 90 182 255;
+  --purple-rgb: 167 139 250;
+  --shadow-rgb: 3 11 29;
+  --app-gradient:
+    radial-gradient(circle at top left, rgba(30, 167, 255, 0.18), transparent 34%),
+    radial-gradient(circle at top right, rgba(126, 240, 199, 0.11), transparent 28%),
+    linear-gradient(180deg, rgb(9 17 31) 0%, rgb(13 23 48) 46%, rgb(9 17 31) 100%);
+  --surface-gradient: linear-gradient(180deg, rgba(19, 35, 63, 0.96) 0%, rgba(15, 27, 49, 0.92) 100%);
+  --highlight-gradient: linear-gradient(135deg, rgba(85, 195, 255, 0.15) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(126, 240, 199, 0.1) 100%);
+  --brand-gradient: linear-gradient(135deg, rgb(200 236 255) 0%, rgb(85 195 255) 42%, rgb(126 240 199) 100%);
+  --selection-bg: rgba(85, 195, 255, 0.25);
+  --focus-ring: rgba(85, 195, 255, 0.65);
+  --scrollbar-thumb: rgba(90, 182, 255, 0.24);
+  --scrollbar-thumb-strong: rgba(90, 182, 255, 0.35);
+  --data-grid-line: rgba(151, 171, 201, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-fill: rgba(255, 255, 255, 0.04);
+  --toast-bg: rgb(17 34 54);
+  --toast-text: rgb(243 247 254);
+  --toast-border: rgba(85, 195, 255, 0.22);
+}
+
+:root[data-theme='lux'] {
+  color-scheme: dark;
+  --bg-rgb: 11 9 8;
+  --surface-rgb: 18 14 13;
+  --panel-rgb: 24 19 17;
+  --panel-alt-rgb: 33 26 23;
+  --panel-soft-rgb: 44 35 30;
+  --line-rgb: 88 69 47;
+  --line-strong-rgb: 167 130 70;
+  --text-primary-rgb: 246 238 226;
+  --text-muted-rgb: 188 168 140;
+  --text-soft-rgb: 149 127 101;
+  --brand-rgb: 212 175 55;
+  --brand-strong-rgb: 238 199 90;
+  --brand-soft-rgb: 247 225 158;
+  --brand-deep-rgb: 167 122 24;
+  --accent-rgb: 232 214 178;
+  --accent-strong-rgb: 216 190 142;
+  --accent-soft-rgb: 250 241 221;
+  --gold-rgb: 212 175 55;
+  --gold-light-rgb: 247 225 158;
+  --gold-dark-rgb: 167 122 24;
+  --navy-rgb: 15 12 12;
+  --navy-light-rgb: 23 18 16;
+  --navy-mid-rgb: 30 23 20;
+  --success-rgb: 88 194 144;
+  --warning-rgb: 240 187 79;
+  --danger-rgb: 240 111 111;
+  --info-rgb: 127 185 226;
+  --purple-rgb: 182 146 224;
+  --shadow-rgb: 0 0 0;
+  --app-gradient:
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.18), transparent 34%),
+    radial-gradient(circle at top right, rgba(232, 214, 178, 0.08), transparent 28%),
+    linear-gradient(180deg, rgb(11 9 8) 0%, rgb(19 15 13) 48%, rgb(11 9 8) 100%);
+  --surface-gradient: linear-gradient(180deg, rgba(24, 19, 17, 0.96) 0%, rgba(16, 12, 11, 0.94) 100%);
+  --highlight-gradient: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(255, 255, 255, 0.04) 42%, rgba(232, 214, 178, 0.12) 100%);
+  --brand-gradient: linear-gradient(135deg, rgb(250 241 221) 0%, rgb(238 199 90) 42%, rgb(212 175 55) 100%);
+  --selection-bg: rgba(212, 175, 55, 0.24);
+  --focus-ring: rgba(238, 199, 90, 0.62);
+  --scrollbar-thumb: rgba(212, 175, 55, 0.22);
+  --scrollbar-thumb-strong: rgba(212, 175, 55, 0.34);
+  --data-grid-line: rgba(188, 168, 140, 0.08);
+  --glass-border: rgba(247, 225, 158, 0.12);
+  --glass-fill: rgba(255, 255, 255, 0.03);
+  --toast-bg: rgb(24 19 17);
+  --toast-text: rgb(246 238 226);
+  --toast-border: rgba(212, 175, 55, 0.28);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+body {
+  background: var(--app-gradient);
+  color: rgb(var(--text-primary-rgb));
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: rgb(var(--text-primary-rgb));
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: var(--app-gradient);
+}
+
+.surface-card {
+  border-radius: 1.5rem;
+  border: 1px solid var(--glass-border);
+  background: var(--surface-gradient);
+  backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 48px rgb(var(--shadow-rgb) / 0.34);
+}
+
+.surface-card-soft {
+  border-radius: 1.25rem;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-fill);
+  backdrop-filter: blur(14px);
+}
+
+.surface-highlight {
+  border-radius: 1.5rem;
+  border: 1px solid rgb(var(--brand-rgb) / 0.2);
+  background: var(--highlight-gradient);
+  box-shadow: 0 0 0 1px rgb(var(--brand-rgb) / 0.18), 0 20px 60px rgb(var(--brand-strong-rgb) / 0.18);
+}
+
+.section-kicker {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgb(var(--text-soft-rgb));
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.data-grid {
+  background-image:
+    linear-gradient(var(--data-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--data-grid-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.text-gradient-brand {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, rgb(var(--gold-light-rgb)) 0%, rgb(var(--gold-rgb)) 45%, rgb(var(--gold-dark-rgb)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -1,0 +1,276 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  MANAGER
+  COORDINATOR
+  USER
+}
+
+enum DepositStatus {
+  OPEN
+  PENDING_REVIEW
+  COORDINATOR_APPROVED
+  MANAGER_APPROVED
+  IN_PROGRESS
+  COMPLETED
+  DENIED
+  UNDER_APPEAL
+  WRITTEN_OFF
+  TOTALS_MISMATCH
+}
+
+enum AccessRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// ─── Models ─────────────────────────────────────────────────────────────────
+
+model Tenant {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  address   String?
+  phone     String?
+  logoUrl   String?
+  settings  Json     @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  locations      Location[]
+  offices        Office[]
+  users          User[]
+  deposits       Deposit[]
+  files          File[]
+  comments       Comment[]
+  auditLogs      AuditLog[]
+  accessRequests AccessRequest[]
+  inviteTokens   InviteToken[]
+
+  @@index([slug])
+}
+
+model Location {
+  id        String   @id @default(uuid())
+  tenantId  String
+  name      String
+  address   String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  offices  Office[]
+  deposits Deposit[]
+  users    User[]
+
+  @@index([tenantId])
+}
+
+model Office {
+  id         String   @id @default(uuid())
+  tenantId   String
+  locationId String
+  name       String
+  notes      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  location Location  @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  deposits Deposit[]
+  users    User[]
+
+  @@index([tenantId])
+  @@index([locationId])
+}
+
+model User {
+  id               String   @id @default(uuid())
+  tenantId         String
+  email            String
+  name             String
+  password         String?
+  googleId         String?
+  photoUrl         String?
+  role             Role     @default(USER)
+  active           Boolean  @default(true)
+  locationId       String?
+  officeId         String?
+  assignedLocations String[] @default([])
+  assignedOffices   String[] @default([])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  location Location? @relation(fields: [locationId], references: [id], onDelete: SetNull)
+  office   Office?   @relation(fields: [officeId], references: [id], onDelete: SetNull)
+  comments Comment[]
+  auditLogs AuditLog[]
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@index([tenantId, role])
+  @@index([tenantId, active])
+}
+
+model Deposit {
+  id              String        @id @default(uuid())
+  tenantId        String
+  depositId       String        @unique // e.g. DEP-A1B2C3
+  refId           String?
+  locationId      String?
+  officeId        String?
+  locationName    String?
+  officeName      String?
+  depositDate     DateTime
+  submittedDate   DateTime      @default(now())
+  depositTotal    Decimal       @default(0) @db.Decimal(12, 2)
+  actualDeposit   Decimal       @default(0) @db.Decimal(12, 2)
+  postedAmount    Decimal       @default(0) @db.Decimal(12, 2)
+  unapplied       Decimal       @default(0) @db.Decimal(12, 2)
+  status          DepositStatus @default(OPEN)
+  creditCards     Decimal       @default(0) @db.Decimal(12, 2)
+  efts            Decimal       @default(0) @db.Decimal(12, 2)
+  checks          Decimal       @default(0) @db.Decimal(12, 2)
+  patient         String?
+  dos             DateTime?
+  billedAmt       Decimal       @default(0) @db.Decimal(12, 2)
+  insurancePaid   Decimal       @default(0) @db.Decimal(12, 2)
+  patientPortion  Decimal       @default(0) @db.Decimal(12, 2)
+  cdtCodes        String?
+  provider        String?
+  insurance       String?
+  remarks         String?
+  submittedById   String?
+  submittedByEmail String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  location Location? @relation(fields: [locationId], references: [id], onDelete: SetNull)
+  office   Office?   @relation(fields: [officeId], references: [id], onDelete: SetNull)
+  files    File[]
+  comments Comment[]
+
+  @@index([tenantId])
+  @@index([tenantId, status])
+  @@index([tenantId, locationId])
+  @@index([tenantId, officeId])
+  @@index([tenantId, depositDate])
+  @@index([depositId])
+}
+
+model File {
+  id              String   @id @default(uuid())
+  tenantId        String
+  depositId       String
+  name            String
+  size            Int
+  mimeType        String
+  url             String
+  storageProvider String   @default("cloudinary")
+  publicId        String?
+  createdAt       DateTime @default(now())
+
+  // Relations
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  deposit Deposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([depositId])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  tenantId  String
+  depositId String
+  userId    String
+  userName  String
+  text      String
+  createdAt DateTime @default(now())
+
+  // Relations
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  deposit Deposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([depositId])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  tenantId   String
+  userId     String?
+  userName   String?
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json     @default("{}")
+  createdAt  DateTime @default(now())
+
+  // Relations
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user   User?  @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@index([tenantId, entityType])
+  @@index([tenantId, userId])
+  @@index([createdAt])
+}
+
+model AccessRequest {
+  id        String              @id @default(uuid())
+  tenantId  String?
+  name      String
+  email     String
+  roleHint  String?
+  reason    String?
+  status    AccessRequestStatus @default(PENDING)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([email])
+}
+
+model InviteToken {
+  id         String   @id @default(uuid())
+  tenantId   String
+  token      String   @unique
+  role       Role     @default(USER)
+  locationId String?
+  officeId   String?
+  used       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+
+  // Relations
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([token])
+}
