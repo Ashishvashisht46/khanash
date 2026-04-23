@@ -91,6 +91,7 @@ cp .env.example .env
 # Edit .env with your values:
 #   DATABASE_URL - PostgreSQL connection string
 #   JWT_SECRET - Random secret string (use: openssl rand -hex 32)
+#   DEMO_SEED_PASSWORD - Optional shared password for local seeded demo users
 #   GOOGLE_CLIENT_ID - From Google Cloud Console
 #   CLOUDINARY_* - From Cloudinary dashboard
 
@@ -132,11 +133,8 @@ cd client && npm run dev    # Frontend on http://localhost:5173
 
 Open http://localhost:5173
 
-**Demo Credentials** (from seed):
-- Admin: `admin@luxdental.com` / `Admin@123456`
-- Manager: `manager@luxdental.com` / `Manager@123456`
-
-Or use the Demo Login buttons on the login page.
+For local UI review, use the demo shortcut buttons on the login page.
+If you seed the backend and want a predictable local password for seeded users, set `DEMO_SEED_PASSWORD` before running `npx prisma db seed`.
 
 ---
 
@@ -349,6 +347,7 @@ Use **Nginx** as reverse proxy, **PM2** for process management, **Let's Encrypt*
 | DATABASE_URL | Yes | PostgreSQL connection string |
 | JWT_SECRET | Yes | Secret for signing JWT tokens |
 | JWT_EXPIRY | No | Token expiry (default: 24h) |
+| DEMO_SEED_PASSWORD | No | Optional shared password for locally seeded demo users |
 | GOOGLE_CLIENT_ID | Yes | Google OAuth client ID |
 | CLOUDINARY_CLOUD_NAME | No | Cloudinary cloud name |
 | CLOUDINARY_API_KEY | No | Cloudinary API key |

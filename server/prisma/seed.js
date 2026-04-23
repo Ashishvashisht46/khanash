@@ -50,6 +50,7 @@ const STATUSES = [
 const INSURANCES = ['Aetna', 'BlueCross BlueShield', 'Cigna', 'Delta Dental', 'Guardian', 'MetLife', 'United Healthcare'];
 const PROVIDERS = ['Dr. Smith', 'Dr. Patel', 'Dr. Johnson', 'Dr. Lee', 'Dr. Martinez'];
 const CDT_CODES = ['D0120', 'D0210', 'D1110', 'D2140', 'D2330', 'D4341', 'D7140'];
+const SEED_PASSWORD = process.env.DEMO_SEED_PASSWORD || crypto.randomBytes(12).toString('base64url');
 
 async function main() {
   console.log('🌱 Starting database seed...');
@@ -144,16 +145,14 @@ async function main() {
   console.log(`  ✓ Created 4 offices`);
 
   // ─── Users ────────────────────────────────────────────────────────────────
-  const adminPassword = await bcrypt.hash('Admin@123456', 12);
-  const managerPassword = await bcrypt.hash('Manager@123456', 12);
-  const coordPassword = await bcrypt.hash('Coord@123456', 12);
+  const sharedSeedPassword = await bcrypt.hash(SEED_PASSWORD, 12);
 
   const adminUser = await prisma.user.create({
     data: {
       tenantId: tenant.id,
       email: 'admin@luxdental.com',
       name: 'Alex Admin',
-      password: adminPassword,
+      password: sharedSeedPassword,
       role: 'ADMIN',
       active: true,
     },
@@ -164,7 +163,7 @@ async function main() {
       tenantId: tenant.id,
       email: 'manager@luxdental.com',
       name: 'Maria Manager',
-      password: managerPassword,
+      password: sharedSeedPassword,
       role: 'MANAGER',
       active: true,
       locationId: locationOHM.id,
@@ -177,7 +176,7 @@ async function main() {
       tenantId: tenant.id,
       email: 'coord.ohm@luxdental.com',
       name: 'Chris OHM Coordinator',
-      password: coordPassword,
+      password: sharedSeedPassword,
       role: 'COORDINATOR',
       active: true,
       locationId: locationOHM.id,
@@ -191,7 +190,7 @@ async function main() {
       tenantId: tenant.id,
       email: 'coord.smile@luxdental.com',
       name: 'Sam Smile Coordinator',
-      password: coordPassword,
+      password: sharedSeedPassword,
       role: 'COORDINATOR',
       active: true,
       locationId: locationSmile.id,
@@ -200,10 +199,7 @@ async function main() {
     },
   });
   console.log(`  ✓ Created 4 users (admin, manager, 2 coordinators)`);
-  console.log(`    Admin:   admin@luxdental.com / Admin@123456`);
-  console.log(`    Manager: manager@luxdental.com / Manager@123456`);
-  console.log(`    Coord 1: coord.ohm@luxdental.com / Coord@123456`);
-  console.log(`    Coord 2: coord.smile@luxdental.com / Coord@123456`);
+  console.log('    Seed users use a shared password from DEMO_SEED_PASSWORD or a generated local-only value.');
 
   // ─── Sample Deposits ──────────────────────────────────────────────────────
   const depositData = [
@@ -443,10 +439,11 @@ async function main() {
   console.log('Tenant:  Lux Dental Marketing (slug: lux-dental)');
   console.log('Login URL: http://localhost:5173 (or your CLIENT_URL)');
   console.log('');
-  console.log('Test Credentials:');
-  console.log('  Admin:      admin@luxdental.com   / Admin@123456');
-  console.log('  Manager:    manager@luxdental.com / Manager@123456');
-  console.log('  Coordinator: coord.ohm@luxdental.com / Coord@123456');
+  console.log('Seeded Users:');
+  console.log('  Admin:       admin@luxdental.com');
+  console.log('  Manager:     manager@luxdental.com');
+  console.log('  Coordinator: coord.ohm@luxdental.com');
+  console.log(`Shared password for this seed run: ${SEED_PASSWORD}`);
   console.log('══════════════════════════════════════════════\n');
 }
 

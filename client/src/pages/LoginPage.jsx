@@ -19,10 +19,10 @@ import { useAuthStore } from '../stores/authStore.js';
 import AppBrand from '../components/layout/AppBrand.jsx';
 
 const DEMO_LOGINS = [
-  { title: 'Admin', email: 'admin@luxdental.com', password: 'Admin@123456' },
-  { title: 'Manager', email: 'manager@luxdental.com', password: 'Manager@123456' },
-  { title: 'Biller', email: 'coord.ohm@luxdental.com', password: 'Coord@123456' },
-  { title: 'Agent', email: 'coord.smile@luxdental.com', password: 'Coord@123456' },
+  { title: 'Admin', email: 'admin@luxdental.com' },
+  { title: 'Manager', email: 'manager@luxdental.com' },
+  { title: 'Biller', email: 'coord.ohm@luxdental.com' },
+  { title: 'Agent', email: 'coord.smile@luxdental.com' },
 ];
 
 const DEMO_USERS = {
@@ -117,15 +117,6 @@ export default function LoginPage() {
       await emailLoginAsync({ email, password });
       navigate('/dashboard', { replace: true });
     } catch (error) {
-      const fallbackAccount = DEMO_LOGINS.find(
-        (account) => account.email === email && account.password === password
-      );
-
-      if (fallbackAccount) {
-        completeDemoLogin(fallbackAccount);
-        return;
-      }
-
       toast.error(error?.message ?? 'Login failed');
     } finally {
       setIsSubmitting(false);
@@ -135,16 +126,8 @@ export default function LoginPage() {
   async function handleDemoLogin(account) {
     if (isSubmitting) return;
     setEmail(account.email);
-    setPassword(account.password);
-    setIsSubmitting(true);
-    try {
-      await emailLoginAsync({ email: account.email, password: account.password });
-      navigate('/dashboard', { replace: true });
-    } catch (error) {
-      completeDemoLogin(account);
-    } finally {
-      setIsSubmitting(false);
-    }
+    setPassword('');
+    completeDemoLogin(account);
   }
 
   return (
@@ -220,7 +203,7 @@ export default function LoginPage() {
               <div>
                 <div className="mb-2 flex items-center justify-between">
                   <label className="block text-[11px] font-semibold uppercase tracking-[0.22em] text-text-soft">Password</label>
-                  <span className="text-xs text-text-soft">Demo credentials supported</span>
+                  <span className="text-xs text-text-soft">Use demo shortcuts below for local review</span>
                 </div>
                 <div className="relative">
                   <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-text-soft" />

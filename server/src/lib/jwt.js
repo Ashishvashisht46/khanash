@@ -1,7 +1,11 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret-in-production';
+const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRY = process.env.JWT_EXPIRY || '24h';
+
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET is required. Refusing to start with an insecure fallback secret.');
+}
 
 /**
  * Generate a signed JWT for the given user.
