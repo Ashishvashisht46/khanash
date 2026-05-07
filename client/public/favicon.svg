@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="16" fill="#0E1118"/>
+  <path d="M18 14H26V28L39 14H49L35 29L50 50H40L30 35L26 39V50H18V14Z" fill="url(#khanashMark)"/>
+  <defs>
+    <linearGradient id="khanashMark" x1="18" y1="14" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF2B8"/>
+      <stop offset="0.45" stop-color="#FFB436"/>
+      <stop offset="1" stop-color="#FF4D5F"/>
+    </linearGradient>
+  </defs>
+</svg>

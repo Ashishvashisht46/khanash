@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useAuthStore } from './stores/authStore.js';
 import { useUiStore } from './stores/uiStore.js';
 import { AppToaster } from './components/ui/Toast.jsx';
+import { BRAND } from './lib/brand.js';
 
 // Lazy-loaded page components
 const LoginPage         = lazy(() => import('./pages/LoginPage.jsx'));
@@ -62,6 +63,11 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
+
+  useEffect(() => {
+    document.title = BRAND.documentTitle;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', BRAND.description);
+  }, []);
 
   return (
     <>

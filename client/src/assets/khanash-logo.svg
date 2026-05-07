@@ -1,0 +1,23 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="120" fill="#0E1118"/>
+  <rect x="28" y="28" width="456" height="456" rx="96" fill="url(#bg)" stroke="url(#stroke)" stroke-width="8"/>
+  <path d="M146 132H204V242L306 132H378L270 246L386 380H312L229 280L204 306V380H146V132Z" fill="url(#mark)"/>
+  <path d="M332 126C354 140 374 159 390 184C406 209 414 235 414 264C414 321 383 371 337 397C372 360 384 310 369 263C355 217 324 181 283 161C299 144 315 132 332 126Z" fill="#FFB436" fill-opacity="0.32"/>
+  <defs>
+    <linearGradient id="bg" x1="64" y1="54" x2="466" y2="471" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#191D28"/>
+      <stop offset="0.48" stop-color="#11141C"/>
+      <stop offset="1" stop-color="#07090E"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="67" y1="52" x2="442" y2="464" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD56A"/>
+      <stop offset="0.5" stop-color="#FF7A35"/>
+      <stop offset="1" stop-color="#FF415F"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="146" y1="132" x2="377" y2="382" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF2B8"/>
+      <stop offset="0.44" stop-color="#FFB436"/>
+      <stop offset="1" stop-color="#FF4D5F"/>
+    </linearGradient>
+  </defs>
+</svg>

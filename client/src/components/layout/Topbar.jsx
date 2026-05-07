@@ -85,26 +85,28 @@ export default function Topbar({ workQueueCount = 0 }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 lg:justify-end">
-            <div className="flex items-center rounded-2xl border border-white/10 bg-white/[0.04] p-1">
-              {THEMES.map((option) => {
-                const active = theme === option.id;
-                return (
-                  <button
-                    key={option.id}
-                    type="button"
-                    onClick={() => setTheme(option.id)}
-                    className={[
-                      'rounded-xl px-3 py-2 text-xs font-semibold transition',
-                      active
-                        ? 'bg-brand text-slate-950 shadow-sm shadow-brand/30'
-                        : 'text-text-muted hover:text-text-primary',
-                    ].join(' ')}
-                  >
-                    {option.label}
-                  </button>
-                );
-              })}
-            </div>
+            {THEMES.length > 1 && (
+              <div className="flex items-center rounded-2xl border border-white/10 bg-white/[0.04] p-1">
+                {THEMES.map((option) => {
+                  const active = theme === option.id;
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => setTheme(option.id)}
+                      className={[
+                        'rounded-xl px-3 py-2 text-xs font-semibold transition',
+                        active
+                          ? 'bg-brand text-slate-950 shadow-sm shadow-brand/30'
+                          : 'text-text-muted hover:text-text-primary',
+                      ].join(' ')}
+                    >
+                      {option.label}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
             <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-text-muted">
               Good to see you, <span className="font-semibold text-text-primary">{firstName}</span>
             </div>

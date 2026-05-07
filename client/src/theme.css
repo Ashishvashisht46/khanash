@@ -101,6 +101,57 @@
   --toast-border: rgba(212, 175, 55, 0.28);
 }
 
+:root[data-theme='khanash'] {
+  color-scheme: dark;
+  --bg-rgb: 7 9 14;
+  --surface-rgb: 14 17 24;
+  --panel-rgb: 18 22 31;
+  --panel-alt-rgb: 26 30 42;
+  --panel-soft-rgb: 34 39 54;
+  --line-rgb: 78 65 55;
+  --line-strong-rgb: 175 96 55;
+  --text-primary-rgb: 250 246 238;
+  --text-muted-rgb: 196 184 168;
+  --text-soft-rgb: 154 140 122;
+  --brand-rgb: 255 180 54;
+  --brand-strong-rgb: 255 122 53;
+  --brand-soft-rgb: 255 213 106;
+  --brand-deep-rgb: 198 75 30;
+  --accent-rgb: 255 77 95;
+  --accent-strong-rgb: 247 68 83;
+  --accent-soft-rgb: 255 193 160;
+  --gold-rgb: 255 180 54;
+  --gold-light-rgb: 255 242 184;
+  --gold-dark-rgb: 198 75 30;
+  --navy-rgb: 10 12 18;
+  --navy-light-rgb: 18 21 30;
+  --navy-mid-rgb: 24 28 40;
+  --success-rgb: 92 214 157;
+  --warning-rgb: 255 196 77;
+  --danger-rgb: 255 95 112;
+  --info-rgb: 106 191 255;
+  --purple-rgb: 182 146 224;
+  --shadow-rgb: 0 0 0;
+  --app-gradient:
+    radial-gradient(circle at top left, rgba(255, 180, 54, 0.2), transparent 34%),
+    radial-gradient(circle at top right, rgba(255, 77, 95, 0.13), transparent 30%),
+    radial-gradient(circle at 58% 20%, rgba(255, 122, 53, 0.08), transparent 34%),
+    linear-gradient(180deg, rgb(7 9 14) 0%, rgb(15 18 26) 48%, rgb(7 9 14) 100%);
+  --surface-gradient: linear-gradient(180deg, rgba(20, 24, 34, 0.96) 0%, rgba(12, 14, 21, 0.94) 100%);
+  --highlight-gradient: linear-gradient(135deg, rgba(255, 180, 54, 0.18) 0%, rgba(255, 255, 255, 0.04) 42%, rgba(255, 77, 95, 0.12) 100%);
+  --brand-gradient: linear-gradient(135deg, rgb(255 242 184) 0%, rgb(255 180 54) 42%, rgb(255 77 95) 100%);
+  --selection-bg: rgba(255, 180, 54, 0.24);
+  --focus-ring: rgba(255, 180, 54, 0.64);
+  --scrollbar-thumb: rgba(255, 180, 54, 0.22);
+  --scrollbar-thumb-strong: rgba(255, 122, 53, 0.34);
+  --data-grid-line: rgba(196, 184, 168, 0.08);
+  --glass-border: rgba(255, 213, 106, 0.12);
+  --glass-fill: rgba(255, 255, 255, 0.035);
+  --toast-bg: rgb(18 22 31);
+  --toast-text: rgb(250 246 238);
+  --toast-border: rgba(255, 180, 54, 0.28);
+}
+
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb-strong) transparent;

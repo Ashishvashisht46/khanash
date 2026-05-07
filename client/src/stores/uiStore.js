@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { LS_UI_KEY } from '../lib/constants.js';
+import { BRAND, THEME_IDS } from '../lib/brand.js';
 
 /* ─────────────────────────────────────────────────────────────────────────────
    UI Store — manages sidebar state, active page, chat panel, and modal visibility.
@@ -27,6 +28,7 @@ function persistUi(partial) {
 }
 
 const saved = loadPersistedUi();
+const savedTheme = THEME_IDS.has(saved.theme) ? saved.theme : BRAND.defaultTheme;
 
 export const useUiStore = create((set, get) => ({
   /* ── State ─────────────────────────────────────────────────────────────── */
@@ -35,7 +37,7 @@ export const useUiStore = create((set, get) => ({
   sidebarCollapsed: saved.sidebarCollapsed ?? false,
 
   /** Active visual theme */
-  theme: saved.theme ?? 'clinical',
+  theme: savedTheme,
 
   /** The current page path — kept in sync by AppLayout via setCurrentPage */
   currentPage: '/',

@@ -17,44 +17,45 @@ import toast from 'react-hot-toast';
 import { useEmailLogin } from '../hooks/useAuth.js';
 import { useAuthStore } from '../stores/authStore.js';
 import AppBrand from '../components/layout/AppBrand.jsx';
+import { BRAND } from '../lib/brand.js';
 
 const DEMO_LOGINS = [
-  { title: 'Admin', email: 'admin@luxdental.com' },
-  { title: 'Manager', email: 'manager@luxdental.com' },
-  { title: 'Biller', email: 'coord.ohm@luxdental.com' },
-  { title: 'Agent', email: 'coord.smile@luxdental.com' },
+  { title: 'Admin', email: `admin@${BRAND.demoEmailDomain}` },
+  { title: 'Manager', email: `manager@${BRAND.demoEmailDomain}` },
+  { title: 'Biller', email: `coord.ohm@${BRAND.demoEmailDomain}` },
+  { title: 'Agent', email: `coord.smile@${BRAND.demoEmailDomain}` },
 ];
 
 const DEMO_USERS = {
-  'admin@luxdental.com': {
+  [DEMO_LOGINS[0].email]: {
     id: 'demo-admin',
     firstName: 'Ava',
     lastName: 'Reynolds',
-    email: 'admin@luxdental.com',
+    email: DEMO_LOGINS[0].email,
     role: 'admin',
     status: 'active',
   },
-  'manager@luxdental.com': {
+  [DEMO_LOGINS[1].email]: {
     id: 'demo-manager',
     firstName: 'Marcus',
     lastName: 'Lane',
-    email: 'manager@luxdental.com',
+    email: DEMO_LOGINS[1].email,
     role: 'rcm_manager',
     status: 'active',
   },
-  'coord.ohm@luxdental.com': {
+  [DEMO_LOGINS[2].email]: {
     id: 'demo-biller',
     firstName: 'Olivia',
     lastName: 'Hart',
-    email: 'coord.ohm@luxdental.com',
+    email: DEMO_LOGINS[2].email,
     role: 'biller',
     status: 'active',
   },
-  'coord.smile@luxdental.com': {
+  [DEMO_LOGINS[3].email]: {
     id: 'demo-agent',
     firstName: 'Sam',
     lastName: 'Miller',
-    email: 'coord.smile@luxdental.com',
+    email: DEMO_LOGINS[3].email,
     role: 'rcm_agent',
     status: 'active',
   },
