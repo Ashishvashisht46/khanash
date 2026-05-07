@@ -18,7 +18,9 @@ export default function AppBrand({ compact = false }) {
       </div>
       {!compact && (
         <div>
-          <p className="font-display text-base font-bold leading-none text-text-primary">{BRAND.name}</p>
+          <p className="font-serif text-[1.08rem] font-semibold leading-none tracking-[0.035em] text-text-primary">
+            {BRAND.name}
+          </p>
           <p className="mt-1 text-[0.68rem] uppercase tracking-[0.26em] text-text-soft">{BRAND.descriptor}</p>
         </div>
       )}
